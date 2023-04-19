@@ -3,12 +3,9 @@ const { loginPage } = require('../pageObjects/loginPage');
 const { homePage } = require('../pageObjects/homePage');
 const { accountPage } = require('../pageObjects/accountPage');
 import path from 'path';
-
+const dataSet =  JSON.parse(JSON.stringify(require("../utils/data.json")));
 
 test('test playwright', async ({ page }) => {
-
-    const email = 'inqom.qaautomationapplicant@gmail.com';
-    const psw = 'o5N,d5ZR@R7^';
 
     const LoginPage = new loginPage(page);
     const HomePage = new homePage(page);
@@ -18,7 +15,7 @@ test('test playwright', async ({ page }) => {
     LoginPage.goToLink();
     await expect(page).toHaveTitle("Welcome to the Jungle - Le guide de l'emploi");
     // login
-    LoginPage.login(email, psw);
+    LoginPage.login(dataSet.email, dataSet.psw);
     await expect(page).toHaveURL("https://www.welcometothejungle.com/fr/");
     //Access to account settings
     HomePage.AccessProfil();
